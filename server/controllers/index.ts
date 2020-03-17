@@ -1,3 +1,3 @@
-import UserController from './UserController';
+import StarWarsPeopleController from './StarWarsPeopleController';
 
-export {UserController};
+export { StarWarsPeopleController };

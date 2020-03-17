@@ -16,32 +16,20 @@ class MainServer extends Server {
 
   constructor() {
     super(true);
-    const { UserController } = controllers;
-    const userController = new UserController();
+    const { StarWarsPeopleController } = controllers;
+    const starWarsPeopleController = new StarWarsPeopleController();
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    super.addControllers([userController]);
+    super.addControllers([starWarsPeopleController]);
     if (this.isProduction) {
       this.app.use('/static', express.static(this.staticPath));
       this.app.get('*', (req, res) => res.sendFile(this.reactPath));
     }
   }
 
-  private setupControllers(): void {
-    const ctlrInstances = [];
-    for (const name in controllers) {
-      if (controllers.hasOwnProperty(name)) {
-        let Controller = (controllers as any)[name];
-        ctlrInstances.push(new Controller());
-      }
-    }
-    super.addControllers(ctlrInstances);
-  }
-
   public start(port: number): void {
     this.app.listen(port, () => {
       Logger.Imp(this.SERVER_START_MSG + port);
-      Logger.Info(`DB HOST: ${process.env.DB_HOST}`);
     });
   }
 }
