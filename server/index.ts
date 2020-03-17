@@ -16,11 +16,13 @@ class MainServer extends Server {
 
   constructor() {
     super(true);
-    const { StarWarsPeopleController } = controllers;
+    const { StarWarsPeopleController, StarWarsFilmsController } = controllers;
     const starWarsPeopleController = new StarWarsPeopleController();
+    const starWarsFilmsController = new StarWarsFilmsController();
+
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    super.addControllers([starWarsPeopleController]);
+    super.addControllers([starWarsPeopleController, starWarsFilmsController]);
     if (this.isProduction) {
       this.app.use('/static', express.static(this.staticPath));
       this.app.get('*', (req, res) => res.sendFile(this.reactPath));

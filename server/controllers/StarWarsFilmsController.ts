@@ -3,43 +3,43 @@ import { Controller, Get } from '@overnightjs/core';
 import { Logger } from '@overnightjs/logger';
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
-import { API_ROOT, API_PEOPLE } from '../consts';
+import { API_ROOT, API_PEOPLE, API_FILMS } from '../consts';
 
-let peopleCache = {};
+let filmCache = [];
+let total = 0;
 
-let personCache = {};
-
-const getPeopleFromCache = async (page: number) => {
-  if (peopleCache[page]) {
-    return peopleCache[page];
+const getFilms = async () => {
+  if (total !== 0) {
+    return filmCache;
   }
-  const url = `${API_ROOT}${API_PEOPLE}?page=${page}`;
+  const url = `${API_ROOT}${API_FILMS}`;
   const response = await fetch(url);
   const json = await response.json();
 
-  peopleCache[page] = json;
-  return json;
+  total = json.count;
+
+  filmCache = json.results;
+  return filmCache;
 };
 
-const getPersonFromCache = async id => {
-  if (personCache[id]) {
-    return peopleCache[id];
+const getFilmById = async id => {
+  if (total === 0) {
+    await getFilms();
   }
-  const url = `${API_ROOT}${API_PEOPLE}/${id}`;
-  const response = await fetch(url);
-  const json = await response.json();
 
-  peopleCache[id] = json;
-  return json;
+  if (filmCache[id]) {
+    return filmCache[id];
+  }
+
+  return {};
 };
 
-@Controller('api/starwars/people')
-class StarWarsPeopleController {
+@Controller('api/starwars/films')
+class StarWarsFilmsController {
   @Get('')
   private async people(req: Request, res: Response) {
     try {
-      const { page = 1 } = req.query;
-      const response = await getPeopleFromCache(page);
+      const response = await getFilms();
       return res.status(OK).json({
         response,
       });
@@ -54,7 +54,7 @@ class StarWarsPeopleController {
   private async person(req: Request, res: Response) {
     try {
       const { id = 1 } = req.params;
-      const response = await getPersonFromCache(id);
+      const response = await getFilmById(id);
       return res.status(OK).json({
         response,
       });
@@ -67,4 +67,4 @@ class StarWarsPeopleController {
   }
 }
 
-export default StarWarsPeopleController;
+export default StarWarsFilmsController;
