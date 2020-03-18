@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import SearchBar from './components/SearchBar';
+import Loading from './components/Loading';
 
 const LOGO_IMG_URL = '/static/images/star_wars_logo.png';
 
@@ -31,11 +32,22 @@ const LogoImg = styled.img`
   width: 150px;
 `;
 
-const MainContent = styled.div`
+const ContentContainer = styled.div`
+  position: relative;
+`;
+
+const MainContentBackground = styled.div`
   background-image: url('/static/images/backgrounds/star_wars_bg_rise.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  content: ' ';
   filter: blur(30px) opacity(0.5);
+  height: 100%;
+`;
+
+const PageContent = styled.div`
+  position: absolute;
+  top: 0;
 `;
 
 const MainFooter = styled.div`
@@ -48,9 +60,10 @@ const MainFooter = styled.div`
 
 interface Props {
   children: React.ReactChild;
+  isBusy?: boolean;
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<Props> = ({ children, isBusy = false }) => {
   return (
     <React.Fragment>
       <MainNav>
@@ -61,7 +74,10 @@ const Layout: React.FC<Props> = ({ children }) => {
           <NavLink to="/people">People</NavLink>
         </NavMenu>
       </MainNav>
-      <MainContent className="content">{children}</MainContent>
+      <ContentContainer className="content">
+        <MainContentBackground />
+        {isBusy ? <Loading /> : <PageContent>{children}</PageContent>}
+      </ContentContainer>
 
       <MainFooter className="footer">test footer</MainFooter>
     </React.Fragment>
