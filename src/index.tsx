@@ -7,11 +7,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
 import User from './components/pages/User';
-import People from './components/pages/People';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './redux';
 import './assets/main.css';
 import Home from './components/pages/Home';
+import People from './components/pages/People';
+import PersonPage from './components/pages/Person';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -20,6 +21,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Route exact path="/" component={Home} />
       <Route exact path="/people" component={People} />
+      <Route path="/people/:id" component={PersonPage} />
       <Route exact path="/user" component={User} />
     </Provider>
   </Router>,
