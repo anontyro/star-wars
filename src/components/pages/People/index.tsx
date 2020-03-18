@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
-import { Person } from '../../../redux/modules/people/reducer';
-import { RootState } from '../../../redux';
-import * as peopleActions from '../../../redux/modules/people/action';
+import styled from 'styled-components';
 import Layout from '../../../_layout';
+import { RootState } from '../../../redux';
+import { Person } from '../../../redux/modules/people/reducer';
+
+interface PersonProps {
+  person: Person;
+}
+
+const PersonContainer = () => {};
 
 interface Props {
-  peopleList: Person[];
   isBusy: boolean;
 }
 
-const HomePage: React.FC<Props> = ({ peopleList, isBusy }) => {
+const PeoplePage: React.FC<Props> = ({ isBusy }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(peopleActions.getPeopleList());
-  }, [dispatch]);
 
   return (
     <Layout isBusy={isBusy}>
-      <h1>Home</h1>
+      <h1>People</h1>
     </Layout>
   );
 };
@@ -31,4 +32,4 @@ const mapStateToProps = ({ people }: RootState) => ({
 
 const enhance = connect(mapStateToProps);
 
-export default enhance(HomePage);
+export default enhance(PeoplePage);
