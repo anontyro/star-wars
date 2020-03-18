@@ -8,6 +8,7 @@ import * as peopleActions from '../../../redux/modules/people/action';
 import PageHeader from '../../shared/PageHeader';
 import Loading from '../../shared/Loading';
 import { CenterDiv } from '../../shared/Containers';
+import { Link } from 'react-router-dom';
 
 const PersonGrid = styled.div`
   display: grid;
@@ -36,8 +37,12 @@ const PersonContainer = styled.div`
   border-radius: 20px;
   box-shadow: 4px 3px 20px black;
   background-color: #0a2748;
+  margin: auto;
   :hover {
     opacity: 0.5;
+  }
+  .next-page-card-body > h1 {
+    font-size: 2em;
   }
 `;
 
@@ -63,12 +68,14 @@ interface PersonProps {
 }
 
 const PersonCard: React.FC<PersonProps> = ({ person }) => (
-  <PersonContainer>
-    <PersonCardImage src={person.image_url} />
-    <PersonCardBody>
-      <h3>{person.name}</h3>
-    </PersonCardBody>
-  </PersonContainer>
+  <Link to={`/people/${person?.id}`}>
+    <PersonContainer>
+      <PersonCardImage src={person.image_url} />
+      <PersonCardBody>
+        <h3>{person.name}</h3>
+      </PersonCardBody>
+    </PersonContainer>
+  </Link>
 );
 
 interface NextCardProps {
@@ -88,7 +95,9 @@ const NextPageCard: React.FC<NextCardProps> = ({ listLength, isBusy = false }) =
 
   return (
     <PersonContainer onClick={isBusy ? () => {} : onClick}>
-      <CenterDiv>{isBusy ? <Loading /> : <h1>Next Page</h1>}</CenterDiv>
+      <CenterDiv className="next-page-card-body">
+        {isBusy ? <Loading /> : <h1>Next Page</h1>}
+      </CenterDiv>
     </PersonContainer>
   );
 };
