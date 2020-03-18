@@ -33,12 +33,6 @@ interface Person {
   id?: number;
 }
 
-interface PeopleState {
-  peopleList: Person[];
-  currentPerson: Person | null;
-  isBusy: boolean;
-}
-
 const DEFAULT_IMAGE_ROOT = '/static/images/main_logo.png';
 const PEOPLE_IMAGE_ROOT = '/static/images/people/';
 
@@ -97,10 +91,15 @@ const getPersonFromCache = async id => {
   }
   const url = `${API_ROOT}${API_PEOPLE}/${id}`;
   const response = await fetch(url);
-  const json = await response.json();
+  const json: Person = await response.json();
+  const person: Person = {
+    ...json,
+    id,
+    image_url: peopleImages[id] ? peopleImages[id].image : DEFAULT_IMAGE_ROOT,
+  };
 
-  peopleCache[id] = json;
-  return json;
+  personCache[id] = person;
+  return personCache[id];
 };
 
 @Controller('api/starwars/people')
