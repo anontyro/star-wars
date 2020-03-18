@@ -1,0 +1,14 @@
+export const RESET_PEOPLE = 'RESET_PEOPLE';
+export type RESET_PEOPLE = typeof RESET_PEOPLE;
+
+export const GETTING_PEOPLE_LIST = 'GETTTING_PEOPLE_LIST';
+export type GETTING_PEOPLE_LIST = typeof GETTING_PEOPLE_LIST;
+
+export const SET_PEOPLE_LIST = 'GOT_PEOPLE_LIST';
+export type SET_PEOPLE_LIST = typeof SET_PEOPLE_LIST;
+
+export const GETTING_PERSON = 'GETTTING_PERSON';
+export type GETTING_PERSON = typeof GETTING_PERSON;
+
+export const SET_PERSON = 'GOT_PERSON';
+export type SET_PERSON = typeof SET_PERSON;
