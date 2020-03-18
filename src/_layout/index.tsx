@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import SearchBar from './components/SearchBar';
-import Loading from './components/Loading';
+import Loading from '../components/shared/Loading';
+import { CenterDiv } from '../components/shared/Containers';
 
 const LOGO_IMG_URL = '/static/images/star_wars_logo.png';
 
 const NavLink = styled(Link)`
+  padding: 0 10px;
   cursor: pointer;
   :hover {
     color: #e7d51d;
@@ -17,37 +19,43 @@ const MainNav = styled.div`
   background-color: black;
   width: 100%;
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
   color: white;
   padding: 20px;
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+  }
 `;
 
 const NavMenu = styled.div`
   display: flex;
-  width: 10vw;
   justify-content: space-around;
 `;
 
 const LogoImg = styled.img`
   width: 150px;
+  margin: auto;
 `;
 
 const ContentContainer = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 const MainContentBackground = styled.div`
-  background-image: url('/static/images/backgrounds/star_wars_bg_rise.jpg');
+  background-image: url('/static/images/backgrounds/star_wars_bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   content: ' ';
-  filter: blur(30px) opacity(0.5);
   height: 100%;
+  padding: 25px 0;
 `;
 
 const PageContent = styled.div`
-  position: absolute;
+  position: relative;
   top: 0;
+  width: 100%;
 `;
 
 const MainFooter = styled.div`
@@ -68,15 +76,22 @@ const Layout: React.FC<Props> = ({ children, isBusy = false }) => {
     <React.Fragment>
       <MainNav>
         <SearchBar />
-        <LogoImg src={LOGO_IMG_URL} width="auto" />
+        <LogoImg src={LOGO_IMG_URL} />
         <NavMenu>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/people">People</NavLink>
         </NavMenu>
       </MainNav>
       <ContentContainer className="content">
-        <MainContentBackground />
-        {isBusy ? <Loading /> : <PageContent>{children}</PageContent>}
+        <MainContentBackground>
+          {isBusy ? (
+            <CenterDiv>
+              <Loading />
+            </CenterDiv>
+          ) : (
+            <PageContent>{children}</PageContent>
+          )}
+        </MainContentBackground>
       </ContentContainer>
 
       <MainFooter className="footer">test footer</MainFooter>
