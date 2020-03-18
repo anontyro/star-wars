@@ -87,7 +87,7 @@ const getPeopleFromCache = async (page: number) => {
 
 const getPersonFromCache = async id => {
   if (personCache[id]) {
-    return peopleCache[id];
+    return personCache[id];
   }
   const url = `${API_ROOT}${API_PEOPLE}/${id}`;
   const response = await fetch(url);
