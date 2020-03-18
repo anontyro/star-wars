@@ -33,7 +33,7 @@ export interface SetPerson {
 
 export type PeopleActions = SetPeople | GettingPeople | GettingPerson | SetPerson | ResetPeople;
 
-const resetPeople = (): ResetPeople => ({
+export const resetPeople = (): ResetPeople => ({
   type: RESET_PEOPLE,
 });
 

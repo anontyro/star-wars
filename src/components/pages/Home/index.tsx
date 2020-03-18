@@ -3,6 +3,7 @@ import { useDispatch, connect } from 'react-redux';
 import { Person } from '../../../redux/modules/people/reducer';
 import { RootState } from '../../../redux';
 import * as peopleActions from '../../../redux/modules/people/action';
+import Layout from '../../../_layout';
 
 interface Props {
   peopleList: Person[];
@@ -16,9 +17,9 @@ const HomePage: React.FC<Props> = () => {
   }, [dispatch]);
 
   return (
-    <React.Fragment>
+    <Layout>
       <h1>Home</h1>
-    </React.Fragment>
+    </Layout>
   );
 };
 
