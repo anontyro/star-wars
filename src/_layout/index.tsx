@@ -16,6 +16,7 @@ const NavLink = styled(Link)`
 `;
 
 const MainNav = styled.div`
+  height: 180px;
   background-color: black;
   width: 100%;
   display: flex;
@@ -24,6 +25,7 @@ const MainNav = styled.div`
   color: white;
   padding: 20px;
   @media screen and (min-width: 600px) {
+    height: 130px;
     flex-direction: row;
   }
 `;
