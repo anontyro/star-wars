@@ -3,7 +3,7 @@ import { Controller, Get } from '@overnightjs/core';
 import { Logger } from '@overnightjs/logger';
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
-import { API_ROOT, API_PEOPLE, API_FILMS } from '../consts';
+import { API_ROOT, API_FILMS } from '../consts';
 
 let filmCache = [];
 let total = 0;

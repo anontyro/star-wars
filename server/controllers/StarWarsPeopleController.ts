@@ -5,6 +5,19 @@ import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import { API_ROOT, API_PEOPLE } from '../consts';
 
+const PEOPLE_IMAGE_ROOT = '/static/images/people/';
+
+const peopleImages = {
+  1: {
+    name: 'Luke Skywalker',
+    image: `${PEOPLE_IMAGE_ROOT}luke_skywalker_main_01.png`,
+  },
+  2: {
+    name: 'C-3PO',
+    image: `${PEOPLE_IMAGE_ROOT}c_3po_main_02.png`,
+  },
+};
+
 let peopleCache = {};
 
 let personCache = {};
@@ -16,7 +29,7 @@ const getPeopleFromCache = async (page: number) => {
   const url = `${API_ROOT}${API_PEOPLE}?page=${page}`;
   const response = await fetch(url);
   const json = await response.json();
-
+  console.log(json);
   peopleCache[page] = json;
   return json;
 };
