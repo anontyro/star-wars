@@ -50,7 +50,7 @@ const people = (state: PeopleState = INITIAL_STATE, action: PeopleActions): Peop
     case SET_PEOPLE_LIST:
       return {
         ...state,
-        peopleList: [...action.payload.results],
+        peopleList: [...state.peopleList, ...action.payload.results],
         isBusy: false,
       };
     case RESET_PEOPLE:

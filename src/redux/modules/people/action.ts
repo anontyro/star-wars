@@ -8,6 +8,7 @@ import {
 } from './consts';
 import { PeopleResponse, Person } from './reducer';
 import { BACKEND_ROUTES } from '../../../enum/serverRoutes';
+import { RootState } from '../..';
 
 export interface ResetPeople {
   type: RESET_PEOPLE;
@@ -56,7 +57,12 @@ const setPerson = (person: Person): SetPerson => ({
 });
 
 export const getPeopleList = (page: number = 1) => {
-  return async (dispatch: ThunkDispatch<unknown, undefined, PeopleActions>) => {
+  return async (dispatch: ThunkDispatch<unknown, undefined, PeopleActions>, getState) => {
+    const state: RootState = getState();
+    const expectedItems = page * 10;
+    if (state.people.peopleList.length >= expectedItems) {
+      return;
+    }
     dispatch(gettingPeopleList());
 
     try {
