@@ -1,4 +1,10 @@
-import { GETTING_PEOPLE_LIST, SET_PEOPLE_LIST, RESET_PEOPLE } from './consts';
+import {
+  GETTING_PEOPLE_LIST,
+  SET_PEOPLE_LIST,
+  RESET_PEOPLE,
+  GETTING_PERSON,
+  SET_PERSON,
+} from './consts';
 import { PeopleActions } from './action';
 
 export interface PeopleResponse {
@@ -51,6 +57,17 @@ const people = (state: PeopleState = INITIAL_STATE, action: PeopleActions): Peop
       return {
         ...state,
         peopleList: [...state.peopleList, ...action.payload.results],
+        isBusy: false,
+      };
+    case GETTING_PERSON:
+      return {
+        ...state,
+        isBusy: true,
+      };
+    case SET_PERSON:
+      return {
+        ...state,
+        currentPerson: action.payload,
         isBusy: false,
       };
     case RESET_PEOPLE:

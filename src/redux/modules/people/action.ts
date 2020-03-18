@@ -66,13 +66,34 @@ export const getPeopleList = (page: number = 1) => {
     dispatch(gettingPeopleList());
 
     try {
-      const response: any = await fetch(`${BACKEND_ROUTES.PEOPLE}?page=${page}`, {
+      const response: any = await fetch(`/${BACKEND_ROUTES.PEOPLE}?page=${page}`, {
         method: 'GET',
       });
       const people: any = await response.json();
       dispatch(setPeopleList(people.response));
     } catch (err) {
       dispatch(resetPeople());
+    }
+  };
+};
+
+export const getPerson = (id: string) => {
+  return async (dispatch: ThunkDispatch<unknown, undefined, PeopleActions>, getState) => {
+    try {
+      dispatch(gettingPerson());
+      const state: RootState = getState();
+      const listId = parseInt(id) - 1;
+      const person = state.people.peopleList[listId];
+      if (person) {
+        dispatch(setPerson(person));
+        return;
+      }
+      const response: any = await fetch(`/${BACKEND_ROUTES.PEOPLE}/${id}`);
+      const json: any = await response.json();
+      dispatch(setPerson(json.response));
+      return;
+    } catch (err) {
+      console.error(err);
     }
   };
 };
