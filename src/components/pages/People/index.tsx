@@ -7,8 +7,9 @@ import { Person } from '../../../redux/modules/people/reducer';
 import * as peopleActions from '../../../redux/modules/people/action';
 import PageHeader from '../../shared/PageHeader';
 import Loading from '../../shared/Loading';
-import { CenterDiv } from '../../shared/Containers';
+import { CenterDiv, PersonContainer } from '../../shared/Containers/Containers';
 import { Link } from 'react-router-dom';
+import PersonCard from '../../shared/Containers/PersonCard';
 
 const PersonGrid = styled.div`
   display: grid;
@@ -23,60 +24,6 @@ const PersonGrid = styled.div`
     grid-template-columns: repeat(5, 1fr);
   }
 `;
-
-const PersonContainer = styled.div`
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  justify-self: center;
-  height: 250px;
-  width: 90%;
-  text-align: center;
-  border: 3px solid gold;
-  padding: 15px;
-  border-radius: 20px;
-  box-shadow: 4px 3px 20px black;
-  background-color: #0a2748;
-  margin: auto;
-  :hover {
-    opacity: 0.5;
-  }
-  .next-page-card-body > h1 {
-    font-size: 2em;
-  }
-`;
-
-const PersonCardImage = styled.img`
-  height: 200px;
-  margin: auto;
-`;
-
-const PersonCardBody = styled.div``;
-
-const PersonBackground = styled.div`
-  content: '';
-  background-color: black;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-`;
-
-interface PersonProps {
-  person: Person;
-}
-
-const PersonCard: React.FC<PersonProps> = ({ person }) => (
-  <Link to={`/people/${person?.id}`}>
-    <PersonContainer>
-      <PersonCardImage src={person.image_url} />
-      <PersonCardBody>
-        <h3>{person.name}</h3>
-      </PersonCardBody>
-    </PersonContainer>
-  </Link>
-);
 
 interface NextCardProps {
   listLength: number;

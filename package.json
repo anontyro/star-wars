@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-brands-svg-icons": "^5.12.1",
+    "@fortawesome/react-fontawesome": "^0.1.9",
     "@overnightjs/core": "^1.6.15",
     "@overnightjs/logger": "^1.1.10",
     "@testing-library/jest-dom": "^4.2.4",

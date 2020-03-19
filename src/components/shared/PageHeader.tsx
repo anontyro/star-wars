@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import COLOURS from '../../enum/colours';
 
 const HeaderLink = styled(Link)`
   :hover {
-    color: #e7d51d;
+    color: ${COLOURS.MAIN_GOLD};
   }
 `;
 
