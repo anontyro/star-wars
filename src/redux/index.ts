@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import user from './modules/user/reducer';
 import people from './modules/people/reducer';
+import film from './modules/films/reducer';
 
 const rootReducer = combineReducers({
-  user,
   people,
+  film,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

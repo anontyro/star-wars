@@ -5,6 +5,11 @@ export interface PeopleResponse {
   results: Person[];
 }
 
+export interface PersonFilmType {
+  image_url: string;
+  title: string;
+}
+
 export interface Person {
   name: string;
   height: string;
@@ -24,6 +29,7 @@ export interface Person {
   url: string;
   image_url?: string;
   id?: number;
+  film_list?: PersonFilmType[] | null;
 }
 
 export interface PeopleState {

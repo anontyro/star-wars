@@ -1,17 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faGithubSquare, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import SearchBar from './components/SearchBar';
 import Loading from '../components/shared/Loading';
 import { CenterDiv } from '../components/shared/Containers/Containers';
 import COLOURS from '../enum/colours';
-import SocialLink, { SocialContainer } from '../components/SocialIcon';
+import SocialLink, { SocialContainer, externalLink } from '../components/SocialIcon';
 
 const LOGO_IMG_URL = '/static/images/star_wars_logo.png';
 
 const NavLink = styled(Link)`
   padding: 0 10px;
+  cursor: pointer;
+  :hover {
+    color: ${COLOURS.MAIN_GOLD};
+  }
+`;
+
+const ExternalLink = styled.div`
   cursor: pointer;
   :hover {
     color: ${COLOURS.MAIN_GOLD};
@@ -66,9 +73,12 @@ const PageContent = styled.div`
 const MainFooter = styled.div`
   background-color: black;
   width: 100%;
-  padding: 20px;
   display: flex;
   justify-content: center;
+`;
+const FooterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 interface Props {
@@ -100,10 +110,16 @@ const Layout: React.FC<Props> = ({ children, isBusy = false }) => {
       </ContentContainer>
 
       <MainFooter className="footer">
-        <SocialContainer>
-          <SocialLink icon={faGithubSquare} url={'https://github.com/anontyro/star-wars'} />
-          <SocialLink icon={faLinkedin} url={'https://www.linkedin.com/in/wilkinsonalexander/'} />
-        </SocialContainer>
+        <FooterContainer>
+          <SocialContainer>
+            <SocialLink icon={faGithubSquare} url={'https://github.com/anontyro/star-wars'} />
+            <SocialLink icon={faLinkedin} url={'https://www.linkedin.com/in/wilkinsonalexander/'} />
+            <SocialLink icon={faFacebookSquare} url={'https://www.facebook.com/AWILKINSON.SG'} />
+          </SocialContainer>
+          <ExternalLink onClick={() => externalLink('https://alexwilkinson.co')}>
+            Alexander Wilkinson
+          </ExternalLink>
+        </FooterContainer>
       </MainFooter>
     </React.Fragment>
   );

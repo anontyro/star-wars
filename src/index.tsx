@@ -6,7 +6,6 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
-import User from './components/pages/User';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './redux';
 import './assets/main.css';
@@ -22,7 +21,6 @@ ReactDOM.render(
       <Route exact path="/" component={Home} />
       <Route exact path="/people" component={People} />
       <Route path="/people/:id" component={PersonPage} />
-      <Route exact path="/user" component={User} />
     </Provider>
   </Router>,
 
