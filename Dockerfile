@@ -18,8 +18,6 @@ RUN npm install && \
 
 COPY --from=builder /home/node/app/build ./build
 
-COPY ./server/static ./static
-
 EXPOSE 3000
 
 CMD npm run prod:server
