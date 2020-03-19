@@ -11,6 +11,7 @@ const HeaderLink = styled(Link)`
 
 const Spacer = styled.span`
   margin: 0 10px;
+  flex: 0;
 `;
 
 const PageHeaderContainer = styled.div`

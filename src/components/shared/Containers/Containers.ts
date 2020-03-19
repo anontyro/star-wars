@@ -12,7 +12,7 @@ export const PersonContainer = styled.div`
   padding: 15px;
   border-radius: 20px;
   box-shadow: 4px 3px 20px black;
-  background-color: #0a2748;
+  background-color: rgb(10, 39, 72, 0.7);
   margin: auto;
   :hover {
     opacity: 0.5;
