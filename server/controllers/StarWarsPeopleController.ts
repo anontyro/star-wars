@@ -4,34 +4,7 @@ import { Logger } from '@overnightjs/logger';
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import { API_ROOT, API_PEOPLE } from '../consts';
-
-interface PeopleResponse {
-  count: number;
-  next: string;
-  previous: number;
-  results: Person[];
-}
-
-interface Person {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-  homeworld: string;
-  films: string[];
-  species: string[];
-  vehicles: string[];
-  starships: string[];
-  created: Date;
-  edited: Date;
-  url: string;
-  image_url?: string;
-  id?: number;
-}
+import { Person, PeopleResponse } from '../../types/People';
 
 const DEFAULT_IMAGE_ROOT = '/static/images/main_logo.png';
 const PEOPLE_IMAGE_ROOT = '/static/images/people/';

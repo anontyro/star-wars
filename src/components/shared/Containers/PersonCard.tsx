@@ -11,16 +11,6 @@ const PersonCardImage = styled.img`
 
 const PersonCardBody = styled.div``;
 
-const PersonBackground = styled.div`
-  content: '';
-  background-color: black;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-`;
-
 interface PersonProps {
   person: Person;
   children?: React.ReactChild;
