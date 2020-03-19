@@ -33,7 +33,13 @@ const HomePage: React.FC<Props> = ({ peopleList, filmList, isBusy }) => {
             <p>
               Welcome to my Star Wars API site that takes the standard SWAPI and enhances it to
               produce a bit more customization along with hopefully a much better user experiance as
-              well
+              well. The site is written in React with Redux as the state management tool and
+              contains quite a lot of caching to try and give the user the best experience.
+            </p>
+            <p>
+              As the SWAPI has rate limiting and also contains limited data I am parsing the
+              endpoint on my server before sending it to the client so it has additional data such
+              as images and ids as they where lacking before.
             </p>
           </MainBodyContainer>
           <MainBodyContainer>

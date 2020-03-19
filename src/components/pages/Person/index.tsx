@@ -58,6 +58,7 @@ const PersonPage: React.FC<Props> = ({ person, isBusy, match }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const { id } = match.params;
     if (`${person?.id}` !== id) {
       dispatch(peopleActions.getPerson(id));

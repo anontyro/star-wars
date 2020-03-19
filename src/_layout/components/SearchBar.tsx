@@ -18,7 +18,7 @@ interface Props {}
 const SearchBar: React.FC<Props> = () => {
   return (
     <React.Fragment>
-      <SearchInput placeholder="Search..." type="text" name="search" />
+      <SearchInput disabled placeholder="Search..." type="text" name="search" />
     </React.Fragment>
   );
 };

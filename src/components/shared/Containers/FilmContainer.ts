@@ -8,7 +8,7 @@ export const FilmContainer = styled.div`
 
 export const PosterImage = styled.img`
   height: 250px;
-  width: 200px;
+  width: 180px;
   border-radius: 10px;
   vertical-align: middle;
   margin: 5px 10px;
