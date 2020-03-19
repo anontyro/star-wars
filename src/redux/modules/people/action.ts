@@ -65,9 +65,7 @@ export const getPeopleList = (page: number = 1) => {
     dispatch(gettingPeopleList());
 
     try {
-      const response: any = await fetch(`/${BACKEND_ROUTES.PEOPLE}?page=${page}`, {
-        method: 'GET',
-      });
+      const response: any = await fetch(`/${BACKEND_ROUTES.PEOPLE}?page=${page}`);
       const people: any = await response.json();
       dispatch(setPeopleList(people.response));
     } catch (err) {

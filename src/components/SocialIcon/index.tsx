@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import COLOURS from '../../enum/colours';
 
 export const SocialContainer = styled.div`
@@ -23,10 +23,10 @@ const SocialIcon = styled.div`
 `;
 
 interface SocialProps {
-  icon: unknown;
+  icon: FontAwesomeIconProps['icon'];
   url: string;
 }
-const SocialLink = ({ icon, url }) => (
+const SocialLink: React.FC<SocialProps> = ({ icon, url }) => (
   <SocialIcon onClick={() => externalLink(url)}>
     <FontAwesomeIcon icon={icon} />
   </SocialIcon>
