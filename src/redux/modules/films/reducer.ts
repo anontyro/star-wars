@@ -3,7 +3,7 @@ import { GETTING_FILM_LIST, SET_FILM_LIST } from './consts';
 import { Person } from '../../../../types/People';
 import { Film } from '../../../../types/Film';
 
-const INITIAL_STATE: FilmState = {
+export const INITIAL_STATE: FilmState = {
   filmList: [],
   currentFilm: null,
   isBusy: false,

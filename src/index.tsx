@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import throttle from 'lodash.throttle';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
@@ -12,8 +13,19 @@ import './assets/main.css';
 import Home from './components/pages/Home';
 import People from './components/pages/People';
 import PersonPage from './components/pages/Person';
+import { saveState, loadState } from './utils/localStorage';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const persistedState = loadState();
+
+const store = createStore(rootReducer, persistedState, composeWithDevTools(applyMiddleware(thunk)));
+
+store.subscribe(
+  throttle(() => {
+    saveState({
+      ...store.getState(),
+    });
+  }, 1000)
+);
 
 ReactDOM.render(
   <Router>
