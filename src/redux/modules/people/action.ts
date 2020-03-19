@@ -6,35 +6,34 @@ import {
   SET_PERSON,
   RESET_PEOPLE,
 } from './consts';
-import { PeopleResponse, Person } from './reducer';
 import { BACKEND_ROUTES } from '../../../enum/serverRoutes';
 import { RootState } from '../..';
+import { PeopleResponse, Person } from '../../../../types/People';
 
-export interface ResetPeople {
+interface ResetPeople {
   type: RESET_PEOPLE;
 }
 
-export interface GettingPeople {
+interface GettingPeople {
   type: GETTING_PEOPLE_LIST;
 }
-
-export interface SetPeople {
+interface SetPeople {
   type: SET_PEOPLE_LIST;
   payload: PeopleResponse;
 }
 
-export interface GettingPerson {
+interface GettingPerson {
   type: GETTING_PERSON;
 }
 
-export interface SetPerson {
+interface SetPerson {
   type: SET_PERSON;
   payload: Person;
 }
 
 export type PeopleActions = SetPeople | GettingPeople | GettingPerson | SetPerson | ResetPeople;
 
-export const resetPeople = (): ResetPeople => ({
+const resetPeople = (): ResetPeople => ({
   type: RESET_PEOPLE,
 });
 
