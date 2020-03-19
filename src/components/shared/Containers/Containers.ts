@@ -30,3 +30,26 @@ export const CenterDiv = styled.div`
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
 `;
+
+export const PageCentreRowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+`;
+
+export const PageCentreColumnContainer = styled(PageCentreRowContainer)`
+  flex-direction: column;
+`;
+
+export const MainBodyContainer = styled.div`
+  flex: 1;
+  margin: 10px;
+  padding: 10px;
+  background-color: rgb(0, 0, 0, 0.5);
+  border-radius: 5px;
+  min-width: 300px;
+  min-height: 200px;
+  overflow-y: auto;
+`;

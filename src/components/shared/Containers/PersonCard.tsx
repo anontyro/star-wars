@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Person } from '../../../redux/modules/people/reducer';
 import { PersonContainer } from './Containers';
+import { Person } from '../../../../types/People';
 
 const PersonCardImage = styled.img`
   height: 200px;
