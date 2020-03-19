@@ -3,13 +3,13 @@ import { useDispatch, connect } from 'react-redux';
 import styled from 'styled-components';
 import Layout from '../../../_layout';
 import { RootState } from '../../../redux';
-import { Person } from '../../../redux/modules/people/reducer';
 import * as peopleActions from '../../../redux/modules/people/action';
 import PageHeader from '../../shared/PageHeader';
 import Loading from '../../shared/Loading';
 import { CenterDiv, PersonContainer } from '../../shared/Containers/Containers';
 import { Link } from 'react-router-dom';
 import PersonCard from '../../shared/Containers/PersonCard';
+import { Person } from '../../../../types/People';
 
 const PersonGrid = styled.div`
   display: grid;

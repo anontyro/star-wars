@@ -8,7 +8,7 @@ export const SocialContainer = styled.div`
   flex-direction: row;
 `;
 
-const externalLink = (url: string) => {
+export const externalLink = (url: string) => {
   window.open(url, '_blank');
 };
 
