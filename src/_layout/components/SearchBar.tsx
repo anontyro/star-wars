@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import COLOURS from '../../enum/colours';
 
 const SearchInput = styled.input`
   background-color: black;
@@ -9,7 +10,7 @@ const SearchInput = styled.input`
   padding: 10px;
   border-radius: 20px;
   font-weight: 800;
-  border-color: #e7d51d;
+  border-color: ${COLOURS.MAIN_GOLD};
 `;
 
 interface Props {}

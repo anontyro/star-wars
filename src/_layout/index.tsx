@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 import SearchBar from './components/SearchBar';
 import Loading from '../components/shared/Loading';
-import { CenterDiv } from '../components/shared/Containers';
+import { CenterDiv } from '../components/shared/Containers/Containers';
+import COLOURS from '../enum/colours';
+import SocialLink, { SocialContainer } from '../components/SocialIcon';
 
 const LOGO_IMG_URL = '/static/images/star_wars_logo.png';
 
@@ -11,7 +14,7 @@ const NavLink = styled(Link)`
   padding: 0 10px;
   cursor: pointer;
   :hover {
-    color: #e7d51d;
+    color: ${COLOURS.MAIN_GOLD};
   }
 `;
 
@@ -65,7 +68,7 @@ const MainFooter = styled.div`
   width: 100%;
   padding: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 interface Props {
@@ -96,7 +99,12 @@ const Layout: React.FC<Props> = ({ children, isBusy = false }) => {
         </MainContentBackground>
       </ContentContainer>
 
-      <MainFooter className="footer">test footer</MainFooter>
+      <MainFooter className="footer">
+        <SocialContainer>
+          <SocialLink icon={faGithubSquare} url={'https://github.com/anontyro/star-wars'} />
+          <SocialLink icon={faLinkedin} url={'https://www.linkedin.com/in/wilkinsonalexander/'} />
+        </SocialContainer>
+      </MainFooter>
     </React.Fragment>
   );
 };
