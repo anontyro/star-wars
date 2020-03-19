@@ -5,20 +5,9 @@ import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import { API_ROOT, API_PEOPLE } from '../consts';
 import { Person, PeopleResponse } from '../../types/People';
+import { peopleImages } from '../data/peopleImages';
 
 const DEFAULT_IMAGE_ROOT = '/static/images/main_logo.png';
-const PEOPLE_IMAGE_ROOT = '/static/images/people/';
-
-const peopleImages = {
-  1: {
-    name: 'Luke Skywalker',
-    image: `${PEOPLE_IMAGE_ROOT}luke_skywalker_main_01.png`,
-  },
-  2: {
-    name: 'C-3PO',
-    image: `${PEOPLE_IMAGE_ROOT}c_3po_main_02.png`,
-  },
-};
 
 let peopleCache = {};
 
@@ -53,7 +42,6 @@ const getPeopleFromCache = async (page: number) => {
     ...json,
     results: [...setItemId(json.results, page)],
   };
-  console.log(peopleList);
   peopleCache[page] = peopleList;
   return peopleCache[page];
 };

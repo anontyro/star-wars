@@ -4,9 +4,23 @@ import { Logger } from '@overnightjs/logger';
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import { API_ROOT, API_FILMS } from '../consts';
+import { Film } from '../../types/Film';
+import { filmImages } from '../data/filmImages';
+
+const DEFAULT_IMAGE_ROOT = '/static/images/main_logo.png';
 
 let filmCache = [];
 let total = 0;
+
+const enhanceFilms = (film: Film[]): Film[] =>
+  film.map((film: Film, index: number) => {
+    const correctedId = index + 1;
+    return {
+      ...film,
+      id: correctedId,
+      image_url: filmImages[correctedId] ? filmImages[correctedId].image : DEFAULT_IMAGE_ROOT,
+    };
+  });
 
 const getFilms = async () => {
   if (total !== 0) {
@@ -18,7 +32,7 @@ const getFilms = async () => {
 
   total = json.count;
 
-  filmCache = json.results;
+  filmCache = enhanceFilms(json.results);
   return filmCache;
 };
 
