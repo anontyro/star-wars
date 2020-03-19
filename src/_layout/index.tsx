@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import { faLinkedin, faGithubSquare, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import SearchBar from './components/SearchBar';
 import Loading from '../components/shared/Loading';
@@ -10,9 +11,14 @@ import SocialLink, { SocialContainer, externalLink } from '../components/SocialI
 
 const LOGO_IMG_URL = '/static/images/star_wars_logo.png';
 
-const NavLink = styled(Link)`
+interface NavLinkProps {
+  isActive?: boolean;
+}
+
+const NavLink = styled(({ isActive, ...rest }) => <Link {...rest} />)<NavLinkProps>`
   padding: 0 10px;
-  cursor: pointer;
+  cursor: ${(props: NavLinkProps) => (props.isActive ? 'unset' : 'pointer')};
+  ${(props: NavLinkProps) => (props.isActive ? `color: ${COLOURS.MAIN_GOLD}` : '')};
   :hover {
     color: ${COLOURS.MAIN_GOLD};
   }
@@ -87,14 +93,19 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ children, isBusy = false }) => {
+  const { pathname } = useLocation();
   return (
     <React.Fragment>
       <MainNav>
         <SearchBar />
         <LogoImg src={LOGO_IMG_URL} />
         <NavMenu>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/people">People</NavLink>
+          <NavLink isActive={pathname === '/'} to="/">
+            Home
+          </NavLink>
+          <NavLink isActive={pathname === '/people'} to="/people">
+            People
+          </NavLink>
         </NavMenu>
       </MainNav>
       <ContentContainer className="content">
