@@ -3,11 +3,28 @@ import { API_ROOT, API_PEOPLE } from '../consts';
 import { Person, PeopleResponse } from '../../types/People';
 import { peopleImages } from '../data/peopleImages';
 
+interface CacheSettings {
+  cacheDate: Date;
+  TTL: Date;
+}
 const DEFAULT_IMAGE_ROOT = '/static/images/main_logo.png';
 
 let peopleCache = {};
 
 let personCache = {};
+
+let CACHE_SETTINGS: CacheSettings = null;
+
+const createCacheSettings = (dateIncrement = 1): CacheSettings => {
+  const now = new Date();
+  const ttl = new Date();
+  ttl.setDate(ttl.getDate() + dateIncrement);
+
+  return {
+    cacheDate: now,
+    TTL: ttl,
+  };
+};
 
 const getId = (page: number, pageSize: number = 10) => (index: number): number => {
   const correctedIndex = index + 1;
@@ -16,6 +33,8 @@ const getId = (page: number, pageSize: number = 10) => (index: number): number =
   }
   return (page - 1) * pageSize + correctedIndex;
 };
+
+const isCacheValid = (): boolean => CACHE_SETTINGS && CACHE_SETTINGS.TTL < new Date();
 
 const setItemId = (people: Person[], page: number): Person[] =>
   people.map((person: Person, index: number) => {
@@ -28,7 +47,7 @@ const setItemId = (people: Person[], page: number): Person[] =>
   });
 
 export const getPeopleFromCache = async (page: number) => {
-  if (peopleCache[page]) {
+  if (peopleCache[page] && isCacheValid()) {
     return peopleCache[page];
   }
   const url = `${API_ROOT}${API_PEOPLE}?page=${page}`;
@@ -39,11 +58,13 @@ export const getPeopleFromCache = async (page: number) => {
     results: [...setItemId(json.results, page)],
   };
   peopleCache[page] = peopleList;
+  const cacheSettings = createCacheSettings();
+  CACHE_SETTINGS = cacheSettings;
   return peopleCache[page];
 };
 
 export const getPersonFromCache = async id => {
-  if (personCache[id]) {
+  if (personCache[id] && isCacheValid()) {
     return personCache[id];
   }
   const url = `${API_ROOT}${API_PEOPLE}/${id}`;
@@ -56,5 +77,7 @@ export const getPersonFromCache = async id => {
   };
 
   personCache[id] = person;
+  const cacheSettings = createCacheSettings();
+  CACHE_SETTINGS = cacheSettings;
   return personCache[id];
 };
